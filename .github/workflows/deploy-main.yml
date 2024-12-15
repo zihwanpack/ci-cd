@@ -21,14 +21,14 @@ jobs:
 
           cat >>~/.ssh/config <<END
           Host ci/cd-test
-            HostName $EC2_HOST
-            User $EC2_USER
+            HostName 54.180.244.240
+            User ubuntu
             IdentityFile ~/.ssh/id_rsa
             StrictHostKeyChecking no
           END
         env:
           EC2_USER: ubuntu
-          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_HOST: 54.180.244.240
           EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
 
       - name: Copy Workspace
@@ -36,10 +36,6 @@ jobs:
           ssh ci/cd-test 'sudo mkdir -p /opt/app'
           ssh ci/cd-test 'sudo chown ubuntu:ubuntu /opt/app'
           scp -r ./[!.]* ci/cd-test:/opt/app
-        env:
-          EC2_USER: ubuntu
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
 
       - name: Install dependencies
         run: |
