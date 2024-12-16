@@ -45,7 +45,7 @@ jobs:
         run: |
           ssh ci-cd-test '
             echo "[Unit]
-            Description=UMC 7th Project
+            Description=ci-cd project
             After=network.target
 
             [Service]
